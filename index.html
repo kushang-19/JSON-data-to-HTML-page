@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>json-html</title>
+
+</head>
+<body>
+    <h1>Fetch data from API and add to page </h1>
+
+    <div id="myData">
+
+    </div>
+
+    <script>
+
+        function getWeather(woeid) {
+
+            fetch(`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${woeid}/`)
+        .then(result => {
+            console.log(result);
+            return result.json()
+        })
+
+        .then(data =>{
+            console.log(data);
+            const today = data.consolidated_weather[0];
+         document.getElementById("myData").innerHTML=' The Temprature of ' + data.title+ ' stays between ' + today.min_temp+ ' and ' + today.max_temp;
+       
+         })
+
+        .catch(error =>{
+            console.log(error);
+        })
+
+}
+    // getWeather(44418);
+    getWeather(2487956);
+    
+</script>
+</body>
+</html>
